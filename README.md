@@ -23,7 +23,7 @@ We have the following pages:
     * Run `npm start`
     * Runs the server at `http://localhost:3001`. Documentation of the available endpoints can be found at `http://localhost:3001/docs`.
 
-3. Type  `npm cd client` from root directory.
+3. Type  `cd client` from root directory.
     * Run  `npm install`
     * Run  `npm start`
     * Your browser will open  [http://localhost:3000/](http://localhost:3000/)  automatically. If not enter URL manually.
