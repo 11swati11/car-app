@@ -79,10 +79,9 @@ class CarHome extends Component {
             </H2>
             <DropdownCustom
                 labelName="Sort By"
-                title={sort ? sort : "None"}
                 name="sort"
                 value={sort}
-                list={[{ title: "None", value: "" }, { title: "Mileage - Ascending", value: "Mileage - Ascending" }, { title: "Mileage - Descending", value: "Mileage - Descending" }]}
+                list={[{ title: "None", value: "" }, { title: "Mileage - Ascending", value: "asc" }, { title: "Mileage - Descending", value: "des" }]}
                 clickHandler={this.handleSortOrder}
             />
         </CarListHeader>

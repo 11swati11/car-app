@@ -15,7 +15,6 @@ const FilterSection = (props) => {
            <FilterForm onSubmit={onFilterSubmit}>
                <DropdownCustom
                    labelName="Color"
-                   title={color ? color : "All car colors"}
                    name="color"
                    value={color}
                    list={colorList}
@@ -23,7 +22,6 @@ const FilterSection = (props) => {
                />
                <DropdownCustom
                    labelName="Manufacturer"
-                   title={manufacturer ? manufacturer : "All manufacturers"}
                    name="manufacturer"
                    value={manufacturer}
                    list={manufacturerList}

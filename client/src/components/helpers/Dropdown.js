@@ -7,7 +7,6 @@ class DropdownCustom extends Component {
        this.state = {
            listOpen: false,
            labelName: this.props.labelName,
-           headerTitle: this.props.title,
            selectedValue: this.props.value
        }
        this.close = this.close.bind(this)
@@ -35,6 +34,14 @@ class DropdownCustom extends Component {
        })
    }
 
+   setHeaderTitle = (val) => {
+       const { list } = this.props
+       let text = list.length>0 && list.filter((item)=>{
+           return item.value === val;
+       })[0];
+       return text.title
+   }
+
    selectItem(name, val, title) {
        this.setState({
            headerTitle: title,
@@ -51,11 +58,11 @@ class DropdownCustom extends Component {
 
    render() {
        const { list, name } = this.props
-       const { listOpen, headerTitle, labelName } = this.state
+       const { listOpen, labelName, selectedValue} = this.state
        return (
            <Dropdown>
                {labelName && <DropdownLabel>{labelName}</DropdownLabel>}
-               <DropdownToggle type="button" onClick={() => this.toggleList()}>{headerTitle}
+               <DropdownToggle type="button" onClick={() => this.toggleList()}>{this.setHeaderTitle(selectedValue)}
                    {listOpen
                        ? <DropdownToggleIcon name="angle-up" />
                        : <DropdownToggleIcon name="angle-down" />
