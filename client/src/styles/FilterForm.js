@@ -1,13 +1,10 @@
-import styled, { css, createGlobalStyle } from "styled-components";
-import { colors, spacing, fontSize } from "./_variables";
-import { Widget, Button } from "./common";
-import {Dropdown} from "./Dropdown";
+import styled from "styled-components";
+import { spacing } from "./_variables";
+import { Widget } from "./CommonStyles";
+import { Dropdown } from "./Dropdown";
 
+export const FilterFormWidget = styled(Widget)`
 
-export const FilterSection = styled(Widget)`
-    @media (max-width: 768px) {
-        margin-bottom: ${spacing.md}
-    }
 `;
 
 export const FilterForm = styled.form`
@@ -17,6 +14,9 @@ export const FilterForm = styled.form`
     
     ${Dropdown}{
         width: 100%; 
+        margin-bottom: ${spacing.md}
+    }
+    @media (max-width: 768px) {
         margin-bottom: ${spacing.md}
     }
 `;

@@ -15,7 +15,6 @@ export const fetchCarsFailure = error => ({
 });
 
 export const requestCarList = (config = {}) => {
-    console.log(config)
     return async dispatch => {
         dispatch(fetchCars());
         try {

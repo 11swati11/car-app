@@ -1,68 +1,47 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# # Welcome to SPA  APP for Buying Car 
 
-## Available Scripts
+I have created an App in which you can change your car buying experience. 
+We have the following pages:
 
-In the project directory, you can run:
+* **Car Listing page**: which contains all the available cars with options -
+	 * **Filter:** on basis of **Color** and **Manufacturer**.
+	 * **Sort:** by mileage in both **ascending** and **descending** order.
+	 * **Pagination:** with limit of **10**.
 
-### `npm start`
+* **Car Detail page**: From the listing page, you can select any car and see the details in a separate detail page with options -
+	* **Favorite/Unfavourite:** Add/Remove a car to/from the favorites collection (using local storage).
+	* **Back to Listing page:** Back to listing page retaining all the previously applied filter/sorting/pagination.
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+* **404:** Page Not Found 
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+# # Steps to Run the App
+1.  Clone or download the repository.
+2.  Run  `npm cd mock-server`
+	* Run  `npm install` 
+	* Run `npm start`
+	* Runs the server at `http://localhost:3001`. Documentation of the available endpoints can be found at `http://localhost:3001/docs`.
+3. Run `npm cd client`
+	* Run  `npm install`
+	* Run  `npm start`
+	* Your browser will open  [http://localhost:3000/](http://localhost:3000/)  automatically. If not enter URL manually.
+4.  Enjoy your buying a car.
 
-### `npm test`
+## Steps to Run the Test Cases
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1.  After  `npm install`.
+2.  Run  `npm run test`.
+3.  Press  `a`  to run all tests.
 
-### `npm run build`
+## Tasks Done
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. [X] List all available cars (implementing pagination with limit of 10).
+2. [X] Allow the user to filter the cars by manufacturer.
+3. [X] Allow the user to filter the cars by color.
+4. [x] Allow the user to sort the car by mileage in both ascending and descending order.
+5. [X] Show the details of a selected car in a separate page.
+6. [X] Add a car to the favorites collection (using local storage).
+7. [X] Remove a car from the favorites collection (using local storage).
+8. [X] Built UI without any library.
+9. [X] Covered good coverage with test cases
+10. [X] Did many performance optimisations like:-
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify

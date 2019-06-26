@@ -5,7 +5,7 @@ const initialState = {
     manufacturer: "",
     color: "",
     page: 1,
-    sort: "asc"
+    sort: "",
 }
 
 describe("filter Reducer", () => {

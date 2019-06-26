@@ -1,15 +1,19 @@
 import React from "react";
-import { Header, Logo, Nav, NavItem } from "../styles/Header";
+
+import { Logo, PageContainer, Img } from "../styles/CommonStyles";
+import { Header, Nav, NavItem } from "../styles/Header";
 import LogoImage from "../images/logo.png";
 
 const PageHeader = () => {
     return <Header>
-        <Logo href="javascript:;"><img src={LogoImage} alt="Auto1" /></Logo>
-        <Nav>
-            <NavItem href="javascript:;">Purchase</NavItem>
-            <NavItem href="javascript:;">My Orders</NavItem>
-            <NavItem href="javascript:;">Sell</NavItem>
-        </Nav>
+        <PageContainer>
+            <Logo><Img src={LogoImage} alt="Auto1" /></Logo>
+            <Nav>
+                <NavItem>Purchase</NavItem>
+                <NavItem>My Orders</NavItem>
+                <NavItem>Sell</NavItem>
+            </Nav>
+        </PageContainer>
     </Header>
 }
 

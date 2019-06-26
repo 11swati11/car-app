@@ -1,5 +1,5 @@
 import React from "react";
-import { Paragraph } from "../styles/common";
+import { Paragraph } from "../styles/CommonStyles";
 import { Footer } from "../styles/Footer";
 
 const PageFooter = () => {

@@ -3,7 +3,8 @@ import * as actionType from "../../actions/actionTypes";
 
 const initialState = {
     colorList: [],
-    isLoading: false
+    isLoading: false,
+    error: null
 }
 const colorList = ["red", "blue", "green", "black", "yellow", "white", "silver"];
 
@@ -17,7 +18,8 @@ describe("color Reducer", () => {
             color(
                 {
                     colorList: [],
-                    isLoading: false
+                    isLoading: false,
+                    error: null
                 },
                 {
                     type: actionType.FETCH_COLORLIST
@@ -25,7 +27,8 @@ describe("color Reducer", () => {
             )
         ).toEqual({
             colorList: [],
-            isLoading: true
+            isLoading: true,
+            error: null
         });
     });
 
@@ -34,20 +37,18 @@ describe("color Reducer", () => {
             color(
                 {
                     colorList: [],
-                    isLoading: true
+                    isLoading: true,
+                    error: null
                 },
                 {
                     type: actionType.FETCH_COLORLIST_SUCCESS,
-                    payload: {
-                        data: {
-                            colors: colorList
-                        }
-                    }
+                    payload: colorList
                 }
             )
         ).toEqual({
             colorList: colorList,
-            isLoading: false
+            isLoading: false,
+            error: null
         });
     });
 
@@ -56,7 +57,7 @@ describe("color Reducer", () => {
             color(
                 {
                     isLoading: true,
-                    error: {},
+                    error: null,
                 },
                 {
                     type: actionType.FETCH_COLORLIST_FAILURE,

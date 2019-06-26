@@ -15,18 +15,9 @@ export const Header = styled.header`
     }
 `;
 
-export const Logo = styled.a`
-    width: 180px;
-    img{max-width: 100%;}
-    @media (max-width: 768px) {
-        display: inline-block;
-        width: 140px;
-        margin-top: ${spacing.sm}
-    }
-`;
-
 export const Nav = styled.nav`
     display:flex;
+    align-self: center;
     list-style: none;
     @media (max-width: 768px) {
         display: block;
@@ -37,6 +28,7 @@ export const Nav = styled.nav`
 
 export const NavItem = styled.a`
     color: inherit;
+    cursor: pointer;
     margin: 0 ${spacing.sm};
     padding: ${spacing.sm} ${spacing.md}
 `;

@@ -1,8 +1,8 @@
 import styled, { css, createGlobalStyle } from "styled-components";
-import { colors, spacing, fontSize } from "./_variables";
+import { containerWidth, colors, spacing, fontSize } from "./_variables";
 
 export const GlobalStyles = createGlobalStyle`
-  html, body{margin: 0;}
+  html, body, #root{margin: 0; height: 100%; min-height: 100%;}
   html{box-sizing: border-box; font-size: 62.5%;}
   body{font-size: ${fontSize.md}; color: ${colors.dark}; font-family: "Roboto", sans-serif;}
   *,
@@ -65,20 +65,62 @@ export const Button = styled.button`
   }
 `;
 
+export const Img = styled.img`
+  max-width: 100%;
+  padding: 1rem;
+  @media (max-width: 768px) {
+    padding: 2rem;
+  }
+`;
+
 export const AnchorLink = styled.a`
   color: ${colors.primary};
   font-size: inherit;
 `;
 
+export const Logo = styled.a`
+    width: 180px;
+    cursor: pointer;
+    @media (max-width: 768px) {
+        display: inline-block;
+        width: 140px;
+        margin-top: ${spacing.sm}
+    }
+`;
+
+export const PageWrapper = styled.div`
+  min-height: 100%;
+  padding-bottom: 8rem; 
+  margin-bottom: -8rem;
+`;
+
 export const PageContainer = styled.div`
     display: flex;
     justify-content: space-between;
-    padding: ${spacing.lg};
+    width: 100%;  
+    max-width: ${containerWidth};
+    margin: 0 auto;
+    padding: ${spacing.lg};   
+    &[data-pagename='page-not-found']{
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin-top: 5rem;
+      ${Paragraph}, ${H1}{margin: 1rem 0;}
+      a{color:${colors.primary}}
+    }
+    &[data-pagename='page-details']{
+      a{
+        display: inline-block;
+        color: ${colors.primary};
+        margin: 1rem 0 2rem;
+      }
+    }
     @media (max-width: 768px) {
         display: block;
         padding: ${spacing.md};
     }
-`;
+  `;
 
 export const PageSidebar = styled.aside`
     flex: 0 0 30%;
@@ -90,15 +132,18 @@ export const PageContent = styled.section`
 
 export const PageBanner = styled.section`
     flex: 0 0 100%;
-    min-height: 300px;
+    text-align: center;
+    min-height: 30rem;
     background-color: ${colors.light};
+    img{margin-top: 2rem;}
     @media (max-width: 768px) {
-        min-height: 200px;
+        min-height: 20rem;
     }
 `;
 
 export const Widget = styled.div`
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     border: 2px solid ${colors.light};

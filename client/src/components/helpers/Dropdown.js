@@ -1,81 +1,78 @@
 import React, { Component } from 'react'
-import styled from "styled-components";
-import { Dropdown, DropdownLabel, DropdownToggle, DropdownList, DropdownItem } from "../../styles/Dropdown"
-
-const Icon = styled.i`
-    content:"&#9660;";
-
-`;
+import { Dropdown, DropdownLabel, DropdownToggle, DropdownToggleIcon, DropdownList, DropdownItem } from "../../styles/Dropdown"
 
 class DropdownCustom extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            listOpen: false,
-            labelName: this.props.labelName,
-            headerTitle: this.props.title,
-        }
-        this.close = this.close.bind(this)
-    }
+   constructor(props) {
+       super(props)
+       this.state = {
+           listOpen: false,
+           labelName: this.props.labelName,
+           headerTitle: this.props.title,
+           selectedValue: this.props.value
+       }
+       this.close = this.close.bind(this)
+   }
 
-    componentDidUpdate() {
-        const { listOpen } = this.state
-        setTimeout(() => {
-            if (listOpen) {
-                window.addEventListener('click', this.close)
-            }
-            else {
-                window.removeEventListener('click', this.close)
-            }
-        }, 0)
-    }
+   componentDidUpdate() {
+       const { listOpen } = this.state
+       setTimeout(() => {
+           if (listOpen) {
+               window.addEventListener('click', this.close)
+           }
+           else {
+               window.removeEventListener('click', this.close)
+           }
+       }, 0)
+   }
 
-    componentWillUnmount() {
-        window.removeEventListener('click', this.close)
-    }
+   componentWillUnmount() {
+       window.removeEventListener('click', this.close)
+   }
 
-    close(timeOut) {
-        this.setState({
-            listOpen: false
-        })
-    }
+   close(timeOut) {
+       this.setState({
+           listOpen: false
+       })
+   }
 
-    selectItem(title, val) {
-        this.setState({
-            headerTitle: val,
-            listOpen: false
-        }, this.props.clickHandler(title, val))
-    }
+   selectItem(name, val, title) {
+       this.setState({
+           headerTitle: title,
+           listOpen: false,
+           selectedValue: val
+       }, this.props.clickHandler(name, val))
+   }
 
-    toggleList() {
-        this.setState(prevState => ({
-            listOpen: !prevState.listOpen
-        }))
-    }
+   toggleList() {
+       this.setState(prevState => ({
+           listOpen: !prevState.listOpen
+       }))
+   }
 
-    render() {
-        const { list, name } = this.props
-        const { listOpen, headerTitle, labelName } = this.state
-        return (
-            <Dropdown>
-                {labelName && <DropdownLabel>{labelName}</DropdownLabel>}                
-                <DropdownToggle type="button" onClick={() => this.toggleList()}>{headerTitle}
-                    {listOpen
-                        ? <Icon name="angle-up" />
-                        : <Icon name="angle-down" />
-                    }
-                </DropdownToggle>
-                {listOpen && <DropdownList onClick={e => e.stopPropagation()}>
-                    {list.map((item, i) => (
-                        <DropdownItem key={i}
-                            onClick={() => this.selectItem(name, item)}>
-                            {item}
-                        </DropdownItem>
-                    ))}
-                </DropdownList>}
-            </Dropdown>
-        )
-    }
+   render() {
+       const { list, name } = this.props
+       const { listOpen, headerTitle, labelName } = this.state
+       return (
+           <Dropdown>
+               {labelName && <DropdownLabel>{labelName}</DropdownLabel>}
+               <DropdownToggle type="button" onClick={() => this.toggleList()}>{headerTitle}
+                   {listOpen
+                       ? <DropdownToggleIcon name="angle-up" />
+                       : <DropdownToggleIcon name="angle-down" />
+                   }
+               </DropdownToggle>
+               {listOpen && <DropdownList onClick={e => e.stopPropagation()}>
+
+                   {list.map((item, i) => (
+                       <DropdownItem key={i} className={item.value === this.state.selectedValue ? "active" : ""}
+                           onClick={() => this.selectItem(name, item.value, item.title)}>
+                           {item.title}
+                       </DropdownItem>
+                   ))}
+               </DropdownList>}
+           </Dropdown>
+       )
+   }
 }
 
 export default DropdownCustom

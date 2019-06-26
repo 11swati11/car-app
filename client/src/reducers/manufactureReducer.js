@@ -1,33 +1,28 @@
 import * as actionType from '../actions/actionTypes';
+import { withAsyncLoadable } from './asyncHOR';
 
 const initialState = {
     manufacturerList: [],
-    isLoading: false
+    isLoading: false,
+    error: null
 }
-
-export default (state = initialState, action) => {
+const baseManufacturerReducer = (state = initialState, action) => {
     switch (action.type) {
-        case actionType.FETCH_MANUFACTURE:
-            return {
-                ...state,
-                isLoading: true
-            };
         case actionType.FETCH_MANUFACTURE_SUCCESS:
-            let list = action.payload.data.manufacturers.map((item) => {
-                return item.name
-            })
             return {
                 ...state,
                 isLoading: false,
-                manufacturerList: list,
+                manufacturerList: action.payload,
             };
-        case actionType.FETCH_MANUFACTURE_FAILURE:
-            return {
-                ...state,
-                isLoading: false,
-                error: action.error
-            };
-        
         default: return state;
     }
 }
+
+
+const manufacturerReducer = withAsyncLoadable({
+    isLoadingAction: 'FETCH_MANUFACTURE',
+    successAction: 'FETCH_MANUFACTURE_SUCCESS',
+    errorAction: 'FETCH_MANUFACTURE_FAILURE',
+})(baseManufacturerReducer);
+
+export default manufacturerReducer;

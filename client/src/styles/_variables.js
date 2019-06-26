@@ -1,3 +1,5 @@
+export const containerWidth = "1170px";
+
 export const colors = {
     light: "#ededed",
     dark: "#4a4a4a",

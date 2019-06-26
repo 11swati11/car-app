@@ -3,21 +3,31 @@ import rootReducer from './reducers';
 import thunkMiddleware from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
-const logger = store => next => action => {
-    console.group(action.type)
-    console.info('dispatching', action)
-    let result = next(action)
-    console.log('next state', store.getState())
-    console.groupEnd()
-    return result
+const localStorageMiddleware = ({ getState }) => {
+    return next => action => {
+        const result = next(action);
+        if (action.type.includes("MARK")) {
+            localStorage.setItem("userFavourites", JSON.stringify(getState().userPref.favourites));
+        }
+        return result;
+    };
+};
+
+const reHydrateStore = () => {
+    let favourites = localStorage.getItem("userFavourites");
+    if (favourites) {
+        let ids = JSON.parse(favourites);
+        return { userPref: {favourites:ids}}
+    }
+    return undefined;
 }
 
-
-export default (initialState) => {
+export default () => {
     return createStore(
         rootReducer,
+        reHydrateStore(),
         composeWithDevTools(
-            applyMiddleware(logger, thunkMiddleware)
+            applyMiddleware(thunkMiddleware, localStorageMiddleware)
         )
     )
 }

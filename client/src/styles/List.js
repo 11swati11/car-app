@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { colors, spacing, fontSize } from "./_variables";
-import { H2, Paragraph } from "./common";
+import { H2, Paragraph } from "./CommonStyles";
 import { Dropdown, DropdownLabel } from "./Dropdown";
 
 export const CarListHeader = styled.div`
@@ -23,14 +23,15 @@ export const CarListHeader = styled.div`
 `;
 
 export const List = styled.ul`
-    display: flex;
-    flex-direction: column;
-    flex-flow: wrap;
-    padding-left: 0;
-    @media (max-width: 768px) {
-        display: block;
-    }
+   display: flex;
+   flex-direction: column;
+   flex-flow: wrap;
+   padding-left: 0;
+   @media (max-width: 768px) {
+       display: block;
+   }
 `;
+List.displayName = 'UlList';
 
 export const ListItem = styled.li`
     display: flex;  

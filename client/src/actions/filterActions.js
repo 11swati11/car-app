@@ -3,14 +3,10 @@ import * as actionType from './actionTypes';
 
 export const fetchManufacture = () => ({ type: actionType.FETCH_MANUFACTURE });
 
-export const fetchManufactureSuccess = json => {
-    return{
-        type: actionType.FETCH_MANUFACTURE_SUCCESS,
-        payload: json
-    }
-}
-    
-
+export const fetchManufactureSuccess = json => ({
+    type: actionType.FETCH_MANUFACTURE_SUCCESS,
+    payload: json
+});
 
 export const fetchManufactureFailure = error => ({
     type: actionType.FETCH_MANUFACTURE_FAILURE,
@@ -22,14 +18,17 @@ export const requestManufacture = () => {
         dispatch(fetchManufacture());
         try {
             const response = await axiosInstance.get("/manufacturers");
-            dispatch(fetchManufactureSuccess(response));
+            let selectableManufacturers = response.data.manufacturers.map((item) => {
+                return { title: item.name, value: item.name }
+            });
+            selectableManufacturers = [{ title: "All Manufacturer", value: "" }, ...selectableManufacturers]
+            dispatch(fetchManufactureSuccess(selectableManufacturers));
         }
         catch (error) {
             dispatch(fetchManufactureFailure(error));
         }
     }
 }
-
 
 
 export const fetchColorList = () => ({ type: actionType.FETCH_COLORLIST });
@@ -48,7 +47,11 @@ export const requestColorList = () => {
         dispatch(fetchColorList());
         try {
             const response = await axiosInstance.get("/colors");
-            dispatch(fetchColorListSuccess(response));
+            let selectableColorList = response.data.colors.map((item) => {
+                return { title: item, value: item }
+            });
+            selectableColorList = [{ title: "All Colors", value: "" }, ...selectableColorList]
+            dispatch(fetchColorListSuccess(selectableColorList));
         }
         catch (error) {
             dispatch(fetchColorListFailure(error));
@@ -75,4 +78,6 @@ export const setOrder = (order) => ({
     type: actionType.SET_SORT_ORDER,
     order
 })
+
+
 

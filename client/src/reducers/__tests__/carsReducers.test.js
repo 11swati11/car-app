@@ -4,8 +4,8 @@ import * as actionType from "../../actions/actionTypes";
 const initialState = {
     carList: [],
     isLoading: false,
-    noOfPages: '10',
-    error: {}
+    noOfPages: 10,
+    error: null
 }
 
 describe("Cars Reducer", () => {
@@ -26,7 +26,8 @@ describe("Cars Reducer", () => {
             )
         ).toEqual({
             carList: [],
-            isLoading: true
+            isLoading: true,
+            error: null
         });
     });
 
@@ -36,18 +37,19 @@ describe("Cars Reducer", () => {
                 {
                     carList: [],
                     isLoading: true,
-                    noOfPages: '10'
+                    noOfPages: 10
                 },
                 {
                     type: actionType.FETCH_CARLIST_SUCCESS,
                     payload: [],
-                    pageCount: '10'
+                    pageCount: 10
                 }
             )
         ).toEqual({
             isLoading: false,
             carList: [],
-            noOfPages: '10'
+            error: null,
+            noOfPages: 10
         });
     });
 
@@ -56,7 +58,7 @@ describe("Cars Reducer", () => {
             cars(
                 {
                     isLoading: true,
-                    error: {},
+                    error: null,
                 },
                 {
                     type: actionType.FETCH_CARLIST_FAILURE,

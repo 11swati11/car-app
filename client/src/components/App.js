@@ -5,22 +5,25 @@ import PageHeader from "../components/PageHeader";
 import PageFooter from "../components/PageFooter";
 import CarHome from '../containers/CarHome';
 import CarDetails from '../containers/CarDetails';
+import NotFound from "./NotFound";
 
-
-import { GlobalStyles } from "../styles/common";
+import { GlobalStyles, PageWrapper } from "../styles/CommonStyles";
 
 const App = () => {
     return (
         <Fragment>
-            <GlobalStyles />            
-            <PageHeader />
-            <BrowserRouter>
-                <Switch>
-                    <Route path="/" exact component={CarHome} />
-                    <Route path="/carDetails/:id" component={CarDetails} />
-                </Switch>
-            </BrowserRouter>            
-            {/* <PageFooter /> */}
+            <GlobalStyles />
+            <PageWrapper>
+                <PageHeader />
+                <BrowserRouter>
+                    <Switch>
+                        <Route path="/" exact component={CarHome} />
+                        <Route path="/carDetails/:id" component={CarDetails} />
+                        <Route path="*" exact component={NotFound} />
+                    </Switch>
+                </BrowserRouter>
+            </PageWrapper>
+            <PageFooter />
         </Fragment>
     )
 }

@@ -1,22 +1,15 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import PropTypes from 'prop-types';
 
-import { H2, Paragraph } from "../styles/common";
-import { List, ListItem, ListItemImg, ListItemText } from '../styles/List';
-import Loader from "./helpers/Loader";
+import LoadingList from "./helpers/LoadingList";
+import CarListItem from "./CarListItem";
+
+import { List} from '../styles/List';
+
 
 const renderCars = (props) => {
     let carLIs = props.list.map(car => {
-        return <ListItem key={car.stockNumber}>
-            <ListItemImg className="img"></ListItemImg>
-            <ListItemText>
-                <H2>{`${car.manufacturerName} ${car.modelName}`}</H2>
-                <Paragraph>
-                    Stock # {car.stockNumber} - {`${car.mileage.number} ${car.mileage.unit}`} - {car.fuelType} - {car.color}
-                </Paragraph>
-                <NavLink to={`/carDetails/${car.stockNumber}`}>View Details</NavLink>
-            </ListItemText>
-        </ListItem>
+        return <CarListItem car={car} key={car.stockNumber} />;
     })
     return <List>{carLIs}</List>;
 };
@@ -24,11 +17,14 @@ const renderCars = (props) => {
 const CarList = (props) => {
     return (
         <React.Fragment>
-            {props.loading ? <Loader/> : renderCars(props)}
+            {props.loading ? <LoadingList listItemCount={10}/> : renderCars(props)}
         </React.Fragment>
     )
-
 }
 
+CarList.prototypes = {
+    loading: PropTypes.bool,
+    list: PropTypes.array
+}
 
 export default CarList;

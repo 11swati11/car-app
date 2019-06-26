@@ -1,11 +1,10 @@
-import { combineReducers } from "redux";
 import * as actionType from '../actions/actionTypes';
 
 const initialState = {
     manufacturer: "",
     color: "",
     page: 1,
-    sort: "asc"
+    sort: "",
 }
 
 export default (state = initialState, action) => {
@@ -14,7 +13,7 @@ export default (state = initialState, action) => {
             return { ...state, page: action.number };
 
         case actionType.SET_SORT_ORDER:
-            return { ...state, sort: action.order};
+            return { ...state, sort: action.order };
 
         case actionType.SET_MANUFACTURER:
             return {
@@ -27,8 +26,8 @@ export default (state = initialState, action) => {
                 ...state,
                 color: action.name
             };
+
         default:
             return state
     }
 }
-

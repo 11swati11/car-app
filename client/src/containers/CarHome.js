@@ -1,17 +1,17 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
+import PropTypes from "prop-types";
 
 import * as filterActions from '../actions/filterActions';
 import { requestCarList } from "../actions/carListAction";
 import DropdownCustom from '../components/helpers/Dropdown';
 
+import FilterSection from "../components/FilterSection";
 import CarList from "../components/CarList";
 import Pagination from "../components/helpers/Pagination";
 
-import { H2, PageContainer, PageSidebar, PageContent, Paragraph, Button } from "../styles/common";
-import { FilterSection, FilterForm } from "../styles/FilterForm";
-import {CarListHeader} from "../styles/List";
-
+import { H2, PageContainer, PageSidebar, PageContent, Paragraph } from "../styles/CommonStyles";
+import { CarListHeader } from "../styles/List";
 class CarHome extends Component {
     constructor(props) {
         super(props);
@@ -24,16 +24,14 @@ class CarHome extends Component {
     componentDidMount() {
         this.props.requestManufacture();
         this.props.requestColorList();
-        this.props.requestCarList();
+        this.props.requestCarList(this.props.filters);
     }
-
 
     componentDidUpdate(prevProps) {
         if (JSON.stringify(this.props.filters) === JSON.stringify(prevProps.filters)) {
             return false;
         }
         this.props.requestCarList(this.props.filters)
-        console.log(prevProps)
     }
 
     setFilters = (name, val) => {
@@ -53,52 +51,58 @@ class CarHome extends Component {
     handleFilterSubmit = (e) => {
         e.preventDefault();
         let { manufacturer, color } = this.state;
-        
+
         this.props.setPage(1);
         this.props.setColor(color);
         this.props.setManufacturer(manufacturer);
+    }
+
+    renderFilterSection = () => {
+        let manufactureListData = this.props.manufactureList;
+        let colorListData = this.props.colorList;
+        let { manufacturer, color } = this.props.filters;
+        return (
+            <FilterSection
+                filterListData={{ manufacturerList: manufactureListData, colorList: colorListData }}
+                selectedFilters={{ manufacturer, color }}
+                filterOptionClick={this.setFilters}
+                onFilterSubmit={this.handleFilterSubmit}
+            />
+        )
+    }
+
+    renderCarListHeader = () => {
+        let { sort } = this.props.filters;
+        return (<CarListHeader>
+            <H2>Available cars
+                <Paragraph textLg>Showing 10 of 100 results</Paragraph>
+            </H2>
+            <DropdownCustom
+                labelName="Sort By"
+                title={sort ? sort : "None"}
+                name="sort"
+                value={sort}
+                list={[{ title: "None", value: "" }, { title: "Mileage - Ascending", value: "Mileage - Ascending" }, { title: "Mileage - Descending", value: "Mileage - Descending" }]}
+                clickHandler={this.handleSortOrder}
+            />
+        </CarListHeader>
+        )
     }
 
     render() {
         return (
             <PageContainer>
                 <PageSidebar>
-                    <FilterSection>
-                        <FilterForm onSubmit={this.handleFilterSubmit}>
-                            <DropdownCustom
-                                labelName="Color"
-                                title="All car colors"
-                                name="color"
-                                list={this.props.colorList}
-                                clickHandler={this.setFilters}
-                            />
-                            <DropdownCustom
-                                labelName="Manufacturer"
-                                title="All manufacturers"
-                                name="manufacturer"
-                                list={this.props.manufactureList}
-                                clickHandler={this.setFilters}
-                            />
-                            <Button type="submit">Filter</Button>
-                        </FilterForm>
-                    </FilterSection>
+                    {this.renderFilterSection()}
                 </PageSidebar>
                 <PageContent>
-                    <CarListHeader>
-                        <H2>
-                            Available cars
-                            <Paragraph textLg>Showing 10 of 100 results</Paragraph>
-                        </H2>
-                        <DropdownCustom
-                            labelName="Sort By"
-                            title="None"
-                            name="sort"
-                            list={['Mileage - Ascending', 'Mileage - Descending']}
-                            clickHandler={this.handleSortOrder}
-                        />
-                    </CarListHeader>
+                    {this.renderCarListHeader()}
                     <CarList loading={this.props.isLoading} list={this.props.carList} />
-                    <Pagination  clickHandler={this.handlePagination} pageCount={this.props.totalPages} currentPage={this.props.filters.page} />
+                    <Pagination
+                        clickHandler={this.handlePagination}
+                        pageCount={this.props.totalPages}
+                        currentPage={this.props.filters.page}
+                    />
                 </PageContent>
             </PageContainer>
         )
@@ -106,7 +110,6 @@ class CarHome extends Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state.cars.noOfPages)
     return {
         carList: state.cars.carList,
         isLoading: state.cars.isLoading,
@@ -127,7 +130,15 @@ const mapDispatchToProps = {
     requestCarList,
 }
 
-
+CarHome.propTypes = {
+    carList: PropTypes.array,
+    isLoading: PropTypes.bool,
+    totalPages: PropTypes.number,
+    manufactureList: PropTypes.array,
+    colorList: PropTypes.array,
+    filters: PropTypes.object,
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(CarHome);
+
 

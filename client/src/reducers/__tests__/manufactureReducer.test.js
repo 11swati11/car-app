@@ -4,7 +4,8 @@ import manufacturerData from '../../__mocks__/manufacturerData';
 
 const initialState = {
     manufacturerList: [],
-    isLoading: false
+    isLoading: false,
+    error: null
 }
 
 describe("manufacture Reducer", () => {
@@ -17,7 +18,8 @@ describe("manufacture Reducer", () => {
             manufacture(
                 {
                     manufacturerList: [],
-                    isLoading: false
+                    isLoading: false,
+                    error: null
                 },
                 {
                     type: actionType.FETCH_MANUFACTURE
@@ -25,7 +27,8 @@ describe("manufacture Reducer", () => {
             )
         ).toEqual({
             manufacturerList: [],
-            isLoading: true
+            isLoading: true,
+            error: null
         });
     });
 
@@ -34,18 +37,18 @@ describe("manufacture Reducer", () => {
             manufacture(
                 {
                     manufacturerList: [],
-                    isLoading: true
+                    isLoading: true,
+                    error: null
                 },
                 {
                     type: actionType.FETCH_MANUFACTURE_SUCCESS,
-                    payload: {
-                        data: manufacturerData
-                    }
+                    payload: manufacturerData
                 }
             )
         ).toEqual({
-            manufacturerList: ["Audi", "BMW", "Chrysler", "Dodge", "Fiat", "Mercedes-Benz", "Porsche", "Skoda", "Tesla", "Volkswagen"],
-            isLoading: false
+            manufacturerList: manufacturerData,
+            isLoading: false,
+            error: null
         });
     });
 
@@ -54,7 +57,7 @@ describe("manufacture Reducer", () => {
             manufacture(
                 {
                     isLoading: true,
-                    error: {},
+                    error: null,
                 },
                 {
                     type: actionType.FETCH_MANUFACTURE_FAILURE,

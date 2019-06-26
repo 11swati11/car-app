@@ -1,8 +1,5 @@
 import styled from "styled-components";
-import { colors, spacing, fontSize} from "./_variables";
-
-// const upArrowCode = "\25B2";
-// const downArrowCode = "\25BC";
+import { colors, spacing, fontSize } from "./_variables";
 
 export const Dropdown = styled.div`
     position: relative;
@@ -27,15 +24,15 @@ export const DropdownToggle = styled.div`
     border: 2px solid ${colors.light};
     text-align: left;
     padding: ${spacing.sm};
-    &:after{
-        position: absolute;
-        display: inline-block;
-        width: 0;
-        height: 0;
-        margin-left: .255em;
-        vertical-align: .255em;
-        content: "\25bc";
-    }
+`;
+
+
+export const DropdownToggleIcon = styled.i`
+    float: right;
+    &:before{
+        color: ${colors.light};
+        content: ${props => props.name === "angle-up" ? "'\\25B2'" : "'\\25BC'"};
+   }
 `;
 
 export const DropdownList = styled.div`
@@ -57,7 +54,7 @@ export const DropdownItem = styled.a`
     border-bottom: 2px solid ${colors.light};
     cursor: pointer;
     &:last-child{border-bottom: none;}
-    &:hover{
+    &:hover, &.active{
         text-decoration: none;
         color: #fff;
         background-color: ${colors.primary}
