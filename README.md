@@ -45,7 +45,8 @@ We have the following pages:
  - [X] Show the details of a selected car in a separate page.
  - [X] Add a car to the favorites collection (using local storage).
  - [X] Remove a car from the favorites collection (using local storage).
- - [X] Built UI without any library.
+ - [X] CSS-in-JS is used for styling purpose. Using [styled-components](https://www.styled-components.com) for styling.
+ - [X] App is responsive (No external CSS/UI framework is used).
  - [X] Covered good coverage with test cases
  - [X] Did many performance optimizations like: 	
 	 - [X] By using lifecycle methods to prevent unnecessary network calls and re-rendering.
@@ -53,3 +54,4 @@ We have the following pages:
 	 - [X] Preventing network request for already requested car details.
 11. [X] Using custom middlewares to handle Favorite/Unfavourite into local storage.
 12. [X] Using Higher Order Reducers, so that code should be more clean, maintainable and extensible.
+13. [X] App is deployed on [https://carapp.swatichoudhary1155.now.sh](https://carapp.swatichoudhary1155.now.sh)
