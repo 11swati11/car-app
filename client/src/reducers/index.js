@@ -14,33 +14,3 @@ export default combineReducers({
     selectedCars: carsDetailsReducer,
     userPref: userPrefrenceReducer
 })
-
-// {/*
-//     {
-//         cars: {
-//             byId: {
-//                 "car1": {},
-//                 "car2": {},
-//                 "car3": {},
-//                 "car4": {},
-//             },
-//             allIds: ["car1", "car2", "car3", "car4"]
-//         },
-//         selectedCar: []
-//         filter: {
-//             byId: {
-//                 "color": {},
-//                 "manufacturer": {}
-//             }
-//         },
-//         sort: {
-//             byId: {
-//                 "mileage": {}
-//             }
-//         },
-//         favourite: {
-
-//         }
-//         loading: false
-//     }
-// */}
